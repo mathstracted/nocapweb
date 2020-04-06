@@ -19,9 +19,9 @@ export class CaptureMotionComponent implements OnInit, OnDestroy {
 
   captureMotionRotation(event: DeviceMotionEvent) {
     this.callCount++;
-    this.accelaration.x = event.acceleration.x;
-    this.accelaration.y = event.acceleration.y;
-    this.accelaration.z = event.acceleration.z;
+    this.accelaration.x = Math.floor(event.acceleration.x);
+    this.accelaration.y = Math.floor(event.acceleration.y);
+    this.accelaration.z = Math.floor(event.acceleration.z);
   }
 
   ngOnInit(): void {

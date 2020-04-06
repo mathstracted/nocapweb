@@ -1,3 +1,6 @@
+@import '../form-layout.scss';
 @import '../common-layout.scss';
 
-@include common-layout
+@include common-layout;
+
+@include form-style(100%, 90%);
