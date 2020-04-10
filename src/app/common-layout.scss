@@ -1,23 +1,22 @@
+@import './mixins/list-no-style.scss';
+
+$main-article: 100vh;
+$main-header: 10vh;
+$content-section: $main-article - $main-header;
+
 @mixin common-layout {
     @media (orientation: portrait){
         article {
-            min-height: 100vh;
-            max-height: 100vh;
-            overflow-x: auto;
-            border: 1px solid purple;
-            
-            div {
-                overflow-x: auto;
-                min-height: 95vh;
-                max-height: 95vh;
-                scroll-snap-type: x mandatory;
-                section {
-                    min-width: 95vw;
-                    max-width: 95vw;
-                    min-height: 90vh;
-                    max-height: 90vh;
-                    scroll-snap-align: start;
-                    flex-wrap: wrap;
+            min-height: $main-article;
+            h1 {
+                min-height: $main-header;
+                text-align: center;
+            }
+            section {
+                min-height: $content-section;
+
+                &.no-list-style {
+                    @include no-display-list-type;
                 }
             }
         }

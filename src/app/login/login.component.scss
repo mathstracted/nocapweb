@@ -1,6 +1,19 @@
-@import '../form-layout.scss';
-@import '../common-layout.scss';
+@import "../form-layout.scss";
+@import "../common-layout.scss";
 
 @include common-layout;
 
 @include form-style(100%, 90%);
+ul {
+    padding-inline-start: 0;
+
+    li.login-buttons {
+        // border: 1px solid grey;
+        border-radius: 100%;
+        margin: 2rem 0rem;
+        img {
+            max-height: 8rem;
+            min-height: 8rem;
+        }
+    }
+}
