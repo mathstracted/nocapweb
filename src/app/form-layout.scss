@@ -1,13 +1,13 @@
-@mixin form-style($form-width, $control-width){
+
+@mixin form-style($form-width, $control-width) {
     @media (orientation: portrait) {
         form {
             width: $form-width;
-            div.form-group {
-                width: 100%;
-                input {
-                    width: $control-width;
-                }
+            width: 100%;
+            input {
+                width: $control-width;
             }
+            @content;
         }
     }
 }

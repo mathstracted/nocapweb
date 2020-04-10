@@ -1,0 +1,9 @@
+@import "../common-layout.scss";
+@import "../form-layout.scss";
+
+@include common-layout;
+@include form-style(100%, 100%) {
+    mat-form-field {
+        width: 90%;
+    }
+}

@@ -7,11 +7,13 @@ import { LoginComponent } from './login/login.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ConnectToNocapDesktopComponent } from './connect-to-nocap-desktop/connect-to-nocap-desktop.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    ConnectToNocapDesktopComponent
   ],
   imports: [
     BrowserModule,

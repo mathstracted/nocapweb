@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 import { CaptureMotionComponent } from './capture-motion/capture-motion.component';
+import { WebsocketClientService } from '../websocket-client.service';
 
 
 const routes: Routes = [
