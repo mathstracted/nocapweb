@@ -5,11 +5,11 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { LoginComponent } from './login/login.component';
-import { WebsocketClientService } from './websocket-client.service';
 import { ConnectToNocapDesktopComponent } from './connect-to-nocap-desktop/connect-to-nocap-desktop.component';
 
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { HttpClientModule } from '@angular/common/http';
 
 const routes: Routes = [
   {
@@ -22,7 +22,6 @@ const routes: Routes = [
   },
   {
     path: "motion",
-    resolve: { websocket: WebsocketClientService },
     loadChildren: () => import('./motion-capture/motion-capture.module').then(mod => mod.MotionCaptureModule)
   },
   {
@@ -35,13 +34,15 @@ const routes: Routes = [
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    HttpClientModule,
     MatInputModule,
     MatButtonModule,
-    RouterModule.forRoot(routes, { enableTracing: true }),
+    RouterModule.forRoot(routes, { enableTracing: false }),
   ],
   exports: [
     CommonModule,
     ReactiveFormsModule,
+    HttpClientModule,
     RouterModule,
     MatInputModule,
     MatButtonModule,

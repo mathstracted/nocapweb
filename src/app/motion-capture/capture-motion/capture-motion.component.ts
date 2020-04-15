@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { MotionDataUploadService } from 'src/app/services/motion-data-upload.service';
 
 @Component({
   selector: 'app-capture-motion',
@@ -12,29 +13,35 @@ export class CaptureMotionComponent implements OnInit, OnDestroy {
   rotationalAcc: { x: number, y: number, z: number };
   listener;
   interval = 0;
-  websocket: WebSocket;
+  serialId = 0;
 
-  constructor(private route: ActivatedRoute) {
+
+  constructor(private route: ActivatedRoute, private motionUploadService: MotionDataUploadService) {
     this.accelaration = { x: 0, y: 0, z: 0 };
     this.listener = this.captureMotionRotation.bind(this);
   }
 
 
   captureMotionRotation(event: DeviceMotionEvent) {
+    console.log("TRIGGER");
+
     this.interval = event.interval;
     this.accelaration.x = (event.acceleration.x);
     this.accelaration.y = (event.acceleration.y);
     this.accelaration.z = (event.acceleration.z);
 
-    this.websocket.send(JSON.stringify(this.accelaration));
+    this.motionUploadService.uploadData({
+      accelaration: this.accelaration,
+      interval: this.interval,
+      serial: this.serialId++
+    })
+      .subscribe((res: any) => {
+      }, console.error
+      );
+
   }
 
   ngOnInit(): void {
-    this.route.data.subscribe(({ websocket }) => {
-      console.log(websocket);
-      this.websocket = websocket;
-      this.websocket.onmessage = console.log;
-    });
     window.addEventListener('devicemotion', this.listener, true);
   }
 
