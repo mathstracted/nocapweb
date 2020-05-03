@@ -14,7 +14,6 @@ export class MotionDataUploadService {
   }
 
   uploadData(motion) {
-    console.log("Uploading", motion);
     return this.http.post(this.motionUploadAddress, motion);
   }
 }

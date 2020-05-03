@@ -12,6 +12,7 @@ export class CaptureMotionComponent implements OnInit, OnDestroy {
   accelaration: { x: number, y: number, z: number };
   rotationalAcc: { x: number, y: number, z: number };
   listener;
+  listening = false;
   interval = 0;
   serialId = 0;
 
@@ -23,8 +24,6 @@ export class CaptureMotionComponent implements OnInit, OnDestroy {
 
 
   captureMotionRotation(event: DeviceMotionEvent) {
-    console.log("TRIGGER");
-
     this.interval = event.interval;
     this.accelaration.x = (event.acceleration.x);
     this.accelaration.y = (event.acceleration.y);
@@ -33,19 +32,33 @@ export class CaptureMotionComponent implements OnInit, OnDestroy {
     this.motionUploadService.uploadData({
       accelaration: this.accelaration,
       interval: this.interval,
-      serial: this.serialId++
+      serial: this.serialId++,
+      timestamp: new Date()
     })
       .subscribe((res: any) => {
       }, console.error
       );
 
+
   }
 
-  ngOnInit(): void {
-    window.addEventListener('devicemotion', this.listener, true);
-  }
+  ngOnInit(): void { }
 
   ngOnDestroy(): void {
     window.removeEventListener('devicemotion', this.listener);
   }
+
+  toggleListeningForMotionData() {
+    if (this.listening) {
+      this.listening = false;
+      window.ondevicemotion = null;
+    } else {
+      this.listening = true;
+      window.ondevicemotion = this.listener;
+    }
+    console.log(window.ondevicemotion);
+    
+  }
 }
+
+
